@@ -1,0 +1,54 @@
+---
+- name: Install Apache web server
+  ansible.builtin.dnf:
+    name:
+      - "{{ apache_package }}"
+      - firewalld
+    state: present
+
+- name: Ensure firewalld is running
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Open HTTP port in firewalld
+  ansible.posix.firewalld:
+    port: "{{ apache_listen_port }}/tcp"
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Deploy default index.html from Jinja2 template
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ apache_index_path }}"
+    mode: "0644"
+
+- name: Configure Apache ServerName
+  ansible.builtin.lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^#?ServerName '
+    line: "ServerName {{ apache_server_name }}"
+    state: present
+  notify: Restart httpd
+
+- name: Start Apache and enable on boot
+  ansible.builtin.service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: true
+
+- name: Flush handlers before availability check
+  ansible.builtin.meta: flush_handlers
+
+- name: Check website availability
+  ansible.builtin.uri:
+    url: "http://127.0.0.1/"
+    status_code: 200
+  register: website_check
+  changed_when: false
+
+- name: Show HTTP check result
+  ansible.builtin.debug:
+    msg: "HTTP status {{ website_check.status }} — site is available"

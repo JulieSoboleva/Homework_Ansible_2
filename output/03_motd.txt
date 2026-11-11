@@ -1,0 +1,12 @@
+
+PLAY [Change system MOTD using a variable] *************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [managed-host]
+
+TASK [Set /etc/motd from variable] *********************************************
+changed: [managed-host]
+
+PLAY RECAP *********************************************************************
+managed-host               : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

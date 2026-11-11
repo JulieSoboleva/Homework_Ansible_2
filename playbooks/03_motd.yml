@@ -1,0 +1,13 @@
+---
+- name: Change system MOTD using a variable
+  hosts: managed
+  become: true
+  vars:
+    motd_message: "Welcome to Ansible managed host!"
+
+  tasks:
+    - name: Set /etc/motd from variable
+      ansible.builtin.copy:
+        content: "{{ motd_message }}\n"
+        dest: /etc/motd
+        mode: "0644"

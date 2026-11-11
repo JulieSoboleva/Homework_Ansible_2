@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  role_name: apache_info
+  author: homework
+  description: Install Apache and publish host facts as index.html
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: EL
+      versions:
+        - "9"
+dependencies: []

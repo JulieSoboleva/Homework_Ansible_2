@@ -1,0 +1,16 @@
+---
+- name: Install and enable tuned
+  hosts: managed
+  become: true
+
+  tasks:
+    - name: Install tuned package
+      ansible.builtin.dnf:
+        name: tuned
+        state: present
+
+    - name: Start tuned and enable on boot
+      ansible.builtin.service:
+        name: tuned
+        state: started
+        enabled: true

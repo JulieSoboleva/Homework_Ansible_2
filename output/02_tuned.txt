@@ -1,0 +1,15 @@
+
+PLAY [Install and enable tuned] ************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [managed-host]
+
+TASK [Install tuned package] ***************************************************
+changed: [managed-host]
+
+TASK [Start tuned and enable on boot] ******************************************
+changed: [managed-host]
+
+PLAY RECAP *********************************************************************
+managed-host               : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

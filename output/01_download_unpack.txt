@@ -1,0 +1,18 @@
+
+PLAY [Download and unpack archive] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [managed-host]
+
+TASK [Create destination directory for unpack] *********************************
+changed: [managed-host]
+
+TASK [Download Kafka archive] **************************************************
+changed: [managed-host]
+
+TASK [Unpack Kafka archive] ****************************************************
+changed: [managed-host]
+
+PLAY RECAP *********************************************************************
+managed-host               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

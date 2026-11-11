@@ -1,0 +1,40 @@
+
+PLAY [Deploy Apache info page via role] ****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [managed-host]
+
+TASK [apache_info : Install Apache web server] *********************************
+changed: [managed-host]
+
+TASK [apache_info : Ensure firewalld is running] *******************************
+changed: [managed-host]
+
+TASK [apache_info : Open HTTP port in firewalld] *******************************
+changed: [managed-host]
+
+TASK [apache_info : Deploy default index.html from Jinja2 template] ************
+changed: [managed-host]
+
+TASK [apache_info : Configure Apache ServerName] *******************************
+changed: [managed-host]
+
+TASK [apache_info : Start Apache and enable on boot] ***************************
+changed: [managed-host]
+
+TASK [apache_info : Flush handlers before availability check] ******************
+
+RUNNING HANDLER [apache_info : Restart httpd] **********************************
+changed: [managed-host]
+
+TASK [apache_info : Check website availability] ********************************
+ok: [managed-host]
+
+TASK [apache_info : Show HTTP check result] ************************************
+ok: [managed-host] => {
+    "msg": "HTTP status 200 — site is available"
+}
+
+PLAY RECAP *********************************************************************
+managed-host               : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

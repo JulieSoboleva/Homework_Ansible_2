@@ -1,0 +1,7 @@
+---
+apache_package: httpd
+apache_service: httpd
+apache_document_root: /var/www/html
+apache_index_path: /var/www/html/index.html
+apache_listen_port: 80
+apache_server_name: "{{ inventory_hostname }}"

@@ -1,0 +1,30 @@
+---
+- name: Download and unpack archive
+  hosts: managed
+  become: true
+  vars:
+    kafka_version: "2.13-3.7.1"
+    kafka_archive: "kafka_{{ kafka_version }}.tgz"
+    kafka_url: "https://archive.apache.org/dist/kafka/3.7.1/{{ kafka_archive }}"
+    kafka_dest_dir: /opt/kafka
+    kafka_download_path: "/tmp/{{ kafka_archive }}"
+
+  tasks:
+    - name: Create destination directory for unpack
+      ansible.builtin.file:
+        path: "{{ kafka_dest_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Download Kafka archive
+      ansible.builtin.get_url:
+        url: "{{ kafka_url }}"
+        dest: "{{ kafka_download_path }}"
+        mode: "0644"
+
+    - name: Unpack Kafka archive
+      ansible.builtin.unarchive:
+        src: "{{ kafka_download_path }}"
+        dest: "{{ kafka_dest_dir }}"
+        remote_src: true
+        creates: "{{ kafka_dest_dir }}/kafka_{{ kafka_version }}"

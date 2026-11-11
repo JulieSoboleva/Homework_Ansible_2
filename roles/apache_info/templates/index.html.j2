@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Host info — {{ ansible_hostname }}</title>
+</head>
+<body>
+  <h1>Характеристики хоста {{ ansible_hostname }}</h1>
+  {% set disk_names = ansible_devices.keys() | list | select('match', '^(sd|vd|nvme|xvd)') | list | sort %}
+  <ul>
+    <li>CPU (vCPUs): {{ ansible_processor_vcpus }}</li>
+    <li>RAM: {{ ansible_memtotal_mb }} MB</li>
+    <li>Первый HDD: {% if disk_names | length > 0 %}{{ ansible_devices[disk_names[0]].size }} ({{ disk_names[0] }}){% else %}N/A{% endif %}</li>
+    <li>IP-адрес: {{ ansible_default_ipv4.address }}</li>
+  </ul>
+</body>
+</html>

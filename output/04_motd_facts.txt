@@ -1,0 +1,15 @@
+
+PLAY [Set MOTD with IP, hostname and greeting] *********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [managed-host]
+
+TASK [Resolve host IP for MOTD] ************************************************
+ok: [managed-host]
+
+TASK [Set MOTD with host facts] ************************************************
+changed: [managed-host]
+
+PLAY RECAP *********************************************************************
+managed-host               : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

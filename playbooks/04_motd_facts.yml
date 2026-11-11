@@ -1,0 +1,18 @@
+---
+- name: Set MOTD with IP, hostname and greeting
+  hosts: managed
+  become: true
+
+  tasks:
+    - name: Resolve host IP for MOTD
+      ansible.builtin.set_fact:
+        motd_ip: "{{ ansible_default_ipv4.address }}"
+
+    - name: Set MOTD with host facts
+      ansible.builtin.copy:
+        content: |
+          Hostname: {{ ansible_hostname }}
+          IP address: {{ motd_ip }}
+          Хорошего дня, системный администратор!
+        dest: /etc/motd
+        mode: "0644"

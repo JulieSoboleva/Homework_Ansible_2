@@ -1,0 +1,6 @@
+---
+- name: Deploy Apache info page via role
+  hosts: managed
+  become: true
+  roles:
+    - apache_info
